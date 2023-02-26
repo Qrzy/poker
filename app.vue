@@ -32,7 +32,7 @@ const getUser = async () => {
 getUser();
 
 const setName = async () => {
-  const { data, error } = await supa.from('pokerUsers').upsert({ name: name.value, uid: uid.value }, { onConflict: '' }).select('name').single();
+  const { data, error } = await supa.from('pokerUsers').upsert({ name: name.value, uid: uid.value }).select('name').single();
   if (error) {
     name.value = '';
     alert('Could not save name, please try again');
