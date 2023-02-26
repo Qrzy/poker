@@ -23,7 +23,6 @@ const name = useLocalStorage<string>('name', '');
 const getUser = async () => {
   const { data, error } = await supa.from('pokerUsers').select().eq('uid', uid.value).single();
   if (error) {
-    uid.value = null;
     name.value = '';
   } else {
     name.value = data.name;
