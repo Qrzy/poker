@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form v-if="!name" method="post" @submit.prevent="setName">
+    <form method="post" @submit.prevent="setName">
       <input type="text" name="name" id="name" v-model="name">
       <button type="submit">Save</button>
     </form>
