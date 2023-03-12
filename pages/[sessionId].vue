@@ -1,7 +1,7 @@
 <template>
   <div>
-    <form method="post" @submit.prevent="setName">
-      <input type="text" name="name" id="name" v-model="name">
+    <form v-if="!name" method="post" @submit.prevent="setName">
+      <input type="text" name="name" id="name" v-model="nameInput">
       <button type="submit">Save</button>
     </form>
     <p>
@@ -26,6 +26,7 @@ const sessionId = route.params.sessionId;
 const userId = ref(0);
 const uid = useLocalStorage<string>('uid', uuid());
 const name = useLocalStorage<string>('name', '');
+const nameInput = ref('');
 
 const getUser = async () => {
   const { data, error } = await supa.from('pokerUsers').select().eq('uid', uid.value).single();
@@ -39,7 +40,8 @@ const getUser = async () => {
 
 getUser();
 
-const setName = async () => {
+const setName = async (ev: any) => {
+  console.log(ev);
   const userData = {
     ...(userId.value && { id: userId.value }),
     name: name.value,
